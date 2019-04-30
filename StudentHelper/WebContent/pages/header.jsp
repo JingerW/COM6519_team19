@@ -11,13 +11,20 @@
 			<li class="nav-item">
 				<a class="nav-link text-white" href="#" >Applications</a>
 			</li>
+			<%
+            	String username= (String) session.getAttribute("username");
+            	if (username != null) {
+        	%>
+     		<li class="nav-item">
+				<a class="nav-link text-white" href="user.jsp" >User Account</a>
+			</li>
+			<% }%>
 		</ul>
 	</div>
 	<h3 class="col-sm-auto">Student Helper</h3>
 	<div class="collapse navbar-collapse d-flex justify-content-end col-sm-3" id="navbar-right">	
 		
 	    <%
-            String username= (String) session.getAttribute("username");
             if (username == null) {
         %>
             <ul class="navbar-nav">
