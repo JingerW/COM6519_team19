@@ -14,17 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Signup
+ * Servlet implementation class ChangePassword
  */
-@WebServlet("/Signup")
-public class Signup extends HttpServlet {
+@WebServlet("/ChangePassword")
+public class ChangePassword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static final int MYSQL_DUPLICATE_PK = 1062;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Signup() {
+    public ChangePassword() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,48 +42,44 @@ public class Signup extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		String oldpass = request.getParameter("oldpassword");
+		String newpass = request.getParameter("newpassword");
+		String newpassCon = request.getParameter("newpasswordConfirm");
+
 		
-		String username = request.getParameter("signupUsername");
-		String email = request.getParameter("signupEmailAddress");
-		String password = request.getParameter("signupPassword");
-		String passconfirm = request.getParameter("signupPasswordConfirm");
-		System.out.println(username+","+email+","+password+","+passconfirm);
-		
-		if (!password.equals(passconfirm)) {
-			String msg = "password confirmation failed";
+		if (!newpass.equals(newpassCon)) {
+			String msg = "new password confirmation failed";
 			HttpSession session = request.getSession(false);
 			session.setAttribute("msg", msg);
-			response.sendRedirect("signup.jsp");
-			System.out.println("send back alert");
-			}
+			response.sendRedirect("change_password.jsp");
+			System.out.println("confirmation failed");
+		}
 		else {
 			
 			Connection con = MyConnection.connect();
 			Statement stmt = null;
-
+			HttpSession session = request.getSession(false);
+			int userid = (int) session.getAttribute("userid");
+			
 			try {
 				stmt = con.createStatement();
-				String check_username = "SELECT EXISTS(SELECT * FROM team19.user WHERE uname='"+username+"');";
-				System.out.println(check_username);
-				ResultSet rs1 = stmt.executeQuery(check_username);
+				String check_oldpassword = "SELECT EXISTS(SELECT * FROM team19.user WHERE upass='"+oldpass+"' AND id = '"+userid+"');";
+				System.out.println(check_oldpassword);
+				ResultSet rs1 = stmt.executeQuery(check_oldpassword);
 				
-				if (rs1.next()) {
-					String msg = "dulicate username";
-					HttpSession session = request.getSession(false);
+				if (rs1.next() == false) {
+					String msg = "wrong password";
 					session.setAttribute("msg", msg);
-					response.sendRedirect("signup.jsp");
-					System.out.println("dulicapte username");
+					response.sendRedirect("change_password.jsp");
+					System.out.println("wrong password");
 				}
 				else {
-					String insert = "insert into team19.user(uname, upass, uemail) "
-							+ "values('"+username+"','"+password+"','"+email+"')";
+					String insert = "update team19.user set upass = '"+newpass+"' where id = '"+userid+"'";
 					System.out.println(insert);
 					int rs2 = stmt.executeUpdate(insert);
-					
-					HttpSession session = request.getSession(true);
-					session.setAttribute("username", username);
+
 					System.out.println("success");
-					response.sendRedirect("index.jsp");
+					response.sendRedirect("user.jsp");
 				}
 				
 			} catch (SQLException e) {
@@ -97,9 +92,7 @@ public class Signup extends HttpServlet {
 					e.printStackTrace();
 				} 
 			}
-		
 		}
-		
 	}
 
 }

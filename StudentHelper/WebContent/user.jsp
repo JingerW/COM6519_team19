@@ -34,8 +34,16 @@
 		<h3><%=username %></h3>
 	</div>
 	<div class="col-sm-4">
-		<p>Email address: </p>
+		<% String email = (String) session.getAttribute("useremail"); %>
+		<p>Email address: <%=email %></p>
+		<a class="btn btn-primary" href="change_password.jsp" role="button">Change password</a>
 	</div>
+	<div class="col-sm-4">
+		<% int balance = (int) session.getAttribute("balance"); %>
+		<p>Balance remain in peanut bank: <%=balance %> peanut</p>
+		<a class="btn btn-primary" href="topup.jsp" role="button">Top up</a>
+	</div>
+
 </div>
 
 </div>

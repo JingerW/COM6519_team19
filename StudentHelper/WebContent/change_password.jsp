@@ -35,15 +35,19 @@
     session.removeAttribute("msg");} 
   %>
 
-  <form class="border mt-5 mx-auto rounded p-3" style="width:300px" action="Login" method="post">
+  <form class="border mt-5 mx-auto rounded p-3" style="width:300px" action="ChangePassword" method="post">
 
     <div class="form-group">
-      <label for="loginUsername">User name</label>
-      <input type="text" class="form-control" name="loginUsername" placeholder="Username">
+      <label for="oldpassword">Old password</label>
+      <input type="text" class="form-control" name="oldpassword" placeholder="Username">
     </div>
     <div class="form-group">
-      <label for="loginPassword">Password</label>
-      <input type="password" class="form-control" name="loginPassword" placeholder="Password">
+      <label for="newpassword">New password</label>
+      <input type="password" class="form-control" name="newpassword" placeholder="Password">
+    </div>
+        <div class="form-group">
+      <label for="newpasswordConfirm">Confirm new password</label>
+      <input type="password" class="form-control" name="newpasswordConfirm" placeholder="Password">
     </div>
 
     <button type="submit" class="btn btn-primary my-2">Login</button>

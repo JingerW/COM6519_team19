@@ -35,18 +35,25 @@
     session.removeAttribute("msg");} 
   %>
 
-  <form class="border mt-5 mx-auto rounded p-3" style="width:300px" action="Login" method="post">
+  <form class="border mt-5 mx-auto rounded p-3" style="width:300px" action="Topup" method="post">
 
     <div class="form-group">
-      <label for="loginUsername">User name</label>
-      <input type="text" class="form-control" name="loginUsername" placeholder="Username">
-    </div>
-    <div class="form-group">
-      <label for="loginPassword">Password</label>
-      <input type="password" class="form-control" name="loginPassword" placeholder="Password">
+      <% int balance = (int) session.getAttribute("balance"); %>
+      <p>Your current remaining balance: </p>
+      <p><%=balance %> peanuts</p>
+      <label for="topupamount">Please select top up amount:</label>
+      <select class="form-control" name="topupamount">
+    	<option>5</option>
+    	<option>10</option>
+    	<option>20</option>
+    	<option>30</option>
+    	<option>50</option>
+    	<option>80</option>
+    	<option>100</option>
+ 	  </select>
     </div>
 
-    <button type="submit" class="btn btn-primary my-2">Login</button>
+    <button type="submit" class="btn btn-primary my-2">Top up</button>
   </form>
   
 </div>
