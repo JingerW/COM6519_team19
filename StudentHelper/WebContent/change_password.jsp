@@ -10,19 +10,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</head>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script> 
-	$(function(){
-	  $("#header").load("./pages/header.jsp"); 
-	  $("#footer").load("./pages/footer.jsp"); 
-	});
-</script> 
+</head> 
 
 <body>
 
-<div id="header"></div>
+<div id="header"> <%@ include file="./pages/header.jsp" %> </div>
 
 <div id="content" style="height:800px">
 
@@ -55,6 +47,6 @@
   
 </div>
 
-<div id="footer"></div>
+<div id="footer"> <%@ include file="./pages/footer.jsp" %> </div>
 
 </body>
