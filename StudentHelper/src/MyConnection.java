@@ -10,10 +10,10 @@ public class MyConnection {
 	
 	public static Connection connect() {
 	    Connection con = null;
-	    String url = "jdbc:mysql://localhost:3306/MySql";
+	    String url = "jdbc:mysql://143.167.9.211:3306/MySql";
 	    String driver = "com.mysql.jdbc.Driver";
-	    String user = "root";
-	    String pass = "wjj163401";
+	    String user = "acs17jw";
+	    String pass = "Wjj163401";
 	    try {
 	    	Class.forName(driver);
 	        con = DriverManager.getConnection(url, user, pass);
@@ -32,32 +32,32 @@ public class MyConnection {
 	    return null;
 	}
 	
-//	public static void main(String args[]) throws IOException
-//	{
-//	    Connection con = MyConnection.connect();
-//		Statement stmt = null;
-//	    try {
-//			stmt = con.createStatement();
-//			String query = "select uname,upass from team19.user where uname = 'asd' AND upass = '123'";
-//			ResultSet rs = stmt.executeQuery(query);
-//			if (rs.next()) {
-//
-//				System.out.println("success");
-//
-//			}
-//			else {
-//				System.out.println("not succes");
-//			}
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} finally {
-//			try {
-//				if (stmt != null) { stmt.close();}
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} 
-//		}
-//	}
+	public static void main(String args[]) throws IOException
+	{
+	    Connection con = MyConnection.connect();
+		Statement stmt = null;
+	    try {
+			stmt = con.createStatement();
+			String query = "select * from team19.user ";
+			ResultSet rs = stmt.executeQuery(query);
+			if (rs.next()) {
+
+				System.out.println("success");
+
+			}
+			else {
+				System.out.println("not succes");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null) { stmt.close();}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
+	}
 }
