@@ -50,6 +50,7 @@ public class Signup extends HttpServlet {
 		String passconfirm = request.getParameter("signupPasswordConfirm");
 		System.out.println(username+","+email+","+password+","+passconfirm);
 		
+		
 		if (!password.equals(passconfirm)) {
 			String msg = "password confirmation failed";
 			HttpSession session = request.getSession(false);
@@ -64,11 +65,11 @@ public class Signup extends HttpServlet {
 
 			try {
 				stmt = con.createStatement();
-				String check_username = "SELECT EXISTS(SELECT * FROM team19.user WHERE uname='"+username+"');";
+				String check_username = "SELECT * FROM team19.user WHERE uname='"+username+"';";
 				System.out.println(check_username);
 				ResultSet rs1 = stmt.executeQuery(check_username);
 				
-				if (!rs1.isBeforeFirst() ) {
+				if (rs1.next()) {
 					String msg = "dulicate username";
 					HttpSession session = request.getSession(false);
 					session.setAttribute("msg", msg);
@@ -81,10 +82,19 @@ public class Signup extends HttpServlet {
 					System.out.println(insert);
 					int rs2 = stmt.executeUpdate(insert);
 					
-					HttpSession session = request.getSession(true);
-					session.setAttribute("username", username);
-					System.out.println("success");
-					response.sendRedirect("index.jsp");
+					ResultSet rs3 = stmt.executeQuery("SELECT * FROM team19.user WHERE uname = '"+username+"' AND upass = '"+password+"'");
+					
+					if (rs3.next()) {
+						int user_id = rs3.getInt(1);
+						int balance = rs3.getInt("ubank");
+						HttpSession session = request.getSession(true);
+						session.setAttribute("userid", user_id);
+						session.setAttribute("username", username);
+						session.setAttribute("useremail", email);
+						session.setAttribute("balance", balance);
+						System.out.println("success");
+						response.sendRedirect("index.jsp");
+					}
 				}
 				
 			} catch (SQLException e) {

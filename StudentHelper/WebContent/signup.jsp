@@ -46,7 +46,7 @@
       <input type="password" class="form-control" name="signupPasswordConfirm" placeholder="Password confirm">
     </div>
 
-    <button type="submit" class="btn btn-primary my-2">Login</button>
+    <button type="submit" class="btn btn-primary my-2">Signup</button>
   </form>
   
 </div>
