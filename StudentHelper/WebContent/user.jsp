@@ -21,7 +21,10 @@
 
 <div class="row text-center border rounded col-md-8 offset-md-2 py-4 my-4" style ="background-color:white">
 	<div class="col-sm-2">
-		<img src="https://via.placeholder.com/200x200">
+
+		<!--<img src="https://via.placeholder.com/200x200">-->
+		<img src="${pageContext.request.contextPath}/usericon/icon.png" style="width:200px;height:200px;">
+		
 		<% String user = (String) session.getAttribute("username"); %>
 		<h3><%=user %></h3>
 	</div>
@@ -29,6 +32,37 @@
 		<% String email = (String) session.getAttribute("useremail"); %>
 		<p>Email address: <%=email %></p>
 		<a class="btn btn-primary" href="change_password.jsp" role="button">Change password</a>
+		
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ChangeUserIconModal">
+		  Change user icon
+		</button>
+		<!-- Modal -->
+		<div class="modal fade" id="ChangeUserIconModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title">Please choose an image file:</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      
+			  <form action="UploadUserIcon" method="post" enctype="multipart/form-data">
+			  
+			      <div class="modal-body">
+			        <input type = "file" name = "userIconUpload" size = "50" />
+			      </div>
+			      
+			      <div class="modal-footer">
+			      	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				    <input type="submit" class="btn btn-primary" value="Upload"></input>
+			      </div>
+			      
+			  </form>
+
+		    </div>
+		  </div>
+		</div>
 	</div>
 	<div class="col-sm-4">
 		<% int balance = (int) session.getAttribute("balance"); %>

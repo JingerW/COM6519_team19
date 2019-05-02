@@ -42,7 +42,7 @@
       <input type="password" class="form-control" name="newpasswordConfirm" placeholder="Password">
     </div>
 
-    <button type="submit" class="btn btn-primary my-2">Login</button>
+    <button type="submit" class="btn btn-primary my-2">Submit</button>
   </form>
   
 </div>

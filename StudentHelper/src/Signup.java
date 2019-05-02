@@ -68,7 +68,7 @@ public class Signup extends HttpServlet {
 				System.out.println(check_username);
 				ResultSet rs1 = stmt.executeQuery(check_username);
 				
-				if (rs1.next()) {
+				if (!rs1.isBeforeFirst() ) {
 					String msg = "dulicate username";
 					HttpSession session = request.getSession(false);
 					session.setAttribute("msg", msg);
